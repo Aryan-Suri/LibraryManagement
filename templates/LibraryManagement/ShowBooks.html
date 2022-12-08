@@ -1,0 +1,69 @@
+{% extends 'LibraryManagement/Base.html' %}
+
+
+
+{% block title %}
+    <title>Book List</title>
+{% endblock %}
+
+{% block body %}
+    <h3 style = "text-align: center" class = "display-4">
+        <a style = "text-decoration: none" href="{% url 'showBooks' %}"> Book List</a>
+    </h3>
+
+    <form action="{%url 'search' %}" method="get">
+        <div class="input-group mb-3">
+            <input type="search" name="search" class="form-control" placeholder="Search for Task" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn	btn-primary" type="submit">
+                <i class="fas fa-search"></i> Search </button>
+        </div>
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cover</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td> {{ book.id }}</td>
+                <td><img src = "{{ book.image.url }}" width="400px"></td>
+                <td> {{ book.bookName }}</td>
+                <td> {{ book.bookAuthor }}</td>
+                <td> {{ book.bookGenre }}</td>
+
+                <td>
+                    <button class="btn btn-outline-primary mt-1"><a href="{% url 'updateTasks' book.id %}" class="update-icon">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a></button>
+                </td>
+
+                <td>
+                    <button class="btn btn-outline-danger mt-1"><a href="{% url 'delete' book.id %}" class="delete-icon text-danger">
+                        <i class="fa-solid fa-x"></i>
+                    </a></button>
+                </td>
+                </div>
+            </tr>
+
+        {% empty %}
+            <h3>No items found with your search term, or there is no todo added yet.</h3>
+        {% endfor %}
+        </tbody>
+
+    </table>
+    <a href="{% url 'showBooks' %}" class="btn btn-success"><i class="fas fa-plus"></i> Show Books</a>
+    <br>
+    <br>
+    <br>
+
+
+{% endblock %}

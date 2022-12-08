@@ -1,0 +1,25 @@
+{% extends 'LibraryManagement/Base.html' %}
+
+{% block title %}
+    <title>Add Book</title>
+{% endblock %}
+
+{% block body %}
+    <div class = "row justify-content-center">
+            <div class = "col-lg-9 ">
+                <div class="card border-secondary mb-3">
+                    <div class="card-header">Issue Book</div>
+                    <div class="card-body text-secondary">
+                        <h5 class="card-title"> </h5>
+                        <form action="{% url 'issue' %}" method="post">
+                            {% csrf_token %}
+                            {{ form.as_div}}
+                            <br>
+                            <button class = "btn btn-primary" type="submit"><i class="fa-solid fa-pen-to-square"></i> Save </button>
+                        </form>
+                    </div>
+                </div>
+                <a href="{% url 'showPrompt' %}" class="btn btn-warning"> <i class="fa-solid fa-eye"></i> <strong> View Prompts </strong> </a>
+            </div>
+        </div>
+{% endblock %}
