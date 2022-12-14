@@ -11,14 +11,6 @@
         <a style = "text-decoration: none" href="{% url 'showBooks' %}"> Book List</a>
     </h3>
 
-    <form action="{%url 'search' %}" method="get">
-        <div class="input-group mb-3">
-            <input type="search" name="search" class="form-control" placeholder="Search for Task" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn	btn-primary" type="submit">
-                <i class="fas fa-search"></i> Search </button>
-        </div>
-    </form>
-
     <table class="table table-hover">
         <thead>
         <tr>
@@ -27,6 +19,7 @@
             <th scope="col">Name</th>
             <th scope="col">Author</th>
             <th scope="col">Genre</th>
+            <th scope="col">Rent</th>
             <th scope="col">Update</th>
             <th scope="col">Delete</th>
         </tr>
@@ -39,6 +32,18 @@
                 <td> {{ book.bookName }}</td>
                 <td> {{ book.bookAuthor }}</td>
                 <td> {{ book.bookGenre }}</td>
+
+                <td>
+                    {% if book.rented %}
+                        <button class="btn btn-outline-primary mt-1"><a href="{% url 'issue'  book.id 1%}" class="update-icon">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    </a></button>
+                    {% else %}
+                        <button class="btn btn-outline-success mt-1"><a href="{% url 'issue'  book.id 0%}" class="update-icon">
+                            <i class="fa-solid fa-plus" style="color: forestgreen"></i>
+                        </a></button>
+                    {% endif %}
+                </td>
 
                 <td>
                     <button class="btn btn-outline-primary mt-1"><a href="{% url 'updateTasks' book.id %}" class="update-icon">

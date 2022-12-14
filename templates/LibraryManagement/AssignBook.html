@@ -11,7 +11,7 @@
                     <div class="card-header">Issue Book</div>
                     <div class="card-body text-secondary">
                         <h5 class="card-title"> </h5>
-                        <form action="{% url 'issue' %}" method="post">
+                        <form action="{% url 'issue' book_id %}" method="post">
                             {% csrf_token %}
                             {{ form.as_div}}
                             <br>

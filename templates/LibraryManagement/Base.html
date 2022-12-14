@@ -30,21 +30,31 @@
                                 <a class="nav-link active" aria-current="page" href="{% url 'showBooks' %}"> Home </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{% url 'AddStudent' %}"> Add Student </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{% url 'AddBook' %}"> Add Book </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{% url 'issue' %}"> Assign Book </a>
+                            {#                            <li class="nav-item">#}
+                            {#                                <a class="nav-link active" aria-current="page" href="{% url 'issue' %}"> Assign Book </a>#}
+                            {#                            </li>#}
+                            <li class="nav-item">  <form action="{%url 'search' %}" method="get">
+                                <div class="input-group ">
+                                    <input type="search" name="search" class="form-control" placeholder="Search for Task" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <button class="btn	btn-primary" type="submit">
+                                        <i class="fas fa-search"></i> Search </button>
+                                </div>
+                            </form> </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa-solid fa-bars"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" href="{% url 'register' %}"> Sign-up </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#"> Return Book </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#"> All Info </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </nav>
