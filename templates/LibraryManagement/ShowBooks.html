@@ -26,6 +26,7 @@
         </thead>
         <tbody>
         {% for book in books %}
+            {% if book.user_id == request.user.id %}
             <tr>
                 <td> {{ book.id }}</td>
                 <td><img src = "{{ book.image.url }}" width="400px"></td>
@@ -58,6 +59,7 @@
                 </td>
                 </div>
             </tr>
+            {% endif %}
 
         {% empty %}
             <h3>No items found with your search term, or there is no todo added yet.</h3>

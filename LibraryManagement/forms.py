@@ -14,8 +14,9 @@ class AddBook(forms.ModelForm):
         model = Book
 
 
+
 class BookIssued(forms.ModelForm):
     class Meta:
         #fields = '__all__'
         model = RentBook
-        exclude=['user']
+        exclude = ['user']

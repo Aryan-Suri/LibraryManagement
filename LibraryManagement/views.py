@@ -1,5 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import AddBook
@@ -62,6 +63,7 @@ def showBooks(request):
     return render(request, 'LibraryManagement/ShowBooks.html', context)
 
 
+@login_required(login_url='login')
 def update_task(request, book_id):
     book = Book.objects.get(id=book_id)
     form = AddBook(request.POST or None, instance=book)
