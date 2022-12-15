@@ -1,12 +1,10 @@
 from django.contrib import auth
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import AddBook
 from .models import Book
-from .forms import BookIssued
-from .models import RentBook
 
 
 # Create your views here.
@@ -22,8 +20,8 @@ def login_view(request):
     return render(request, 'LibraryManagement/login.html', {'form': form})
 
 
-def logout(request):
-    auth.logout(request)
+def logout_view(request):
+    logout(request)
     return render(request, 'LibraryManagement/ShowBooks.html')
 
 
@@ -57,6 +55,7 @@ def addBook(request):
     return render(request, 'LibraryManagement/AddBook.html', {'form': form})
 
 
+@login_required(login_url='login')
 def showBooks(request):
     books = Book.objects.all()
     context = {'books': books}
@@ -90,7 +89,6 @@ def search(request):
 
 
 def issue(request, book_id, returned):
-    #book = Book.objects.get(id=book_id, user=request.user)
     rent_book = Book.objects.get(id=book_id, user=request.user)
     if returned == 0:
         rent_book.rented = True
@@ -99,20 +97,3 @@ def issue(request, book_id, returned):
     rent_book.user = request.user
     rent_book.save()
     return redirect('showBooks')
-
-
-
-    # if request.method == "POST":
-    #     form = BookIssued(request.POST)
-    #     if form.is_valid():
-    #         # save data
-    #         unsaved_form = form.save(commit=False)
-    #         book_to_save = RentBook.objects.get(id=unsaved_form.book_instance.id)
-    #         book_to_save.returned = True
-    #         book_to_save.save()
-    #         form.save()
-    #         form.save_m2m()
-    #     return redirect('showBooks')
-    # else:
-    #     context = {'form': BookIssued, "book": RentBook.objects.filter(returned=False)}
-    #     return render(request, 'LibraryManagement/updateTask.html', context=context)
