@@ -16,12 +16,17 @@
                             {% csrf_token %}
                             {{ form.as_div}}
                             <br>
-                            <button class = "btn btn-primary" type="submit"><i class="fa-solid fa-pen-to-square"></i> Save </button>
+                            <button onclick="popup()" class = "btn btn-primary" type="submit"><i class="fa-solid fa-pen-to-square"></i> Save </button>
                         </form>
                     </div>
                 </div>
                 <a href="{% url 'showBooks' %}" class="btn btn-warning"> <i class="fa-solid fa-eye"></i> <strong> Back to Books </strong> </a>
             </div>
         </div>
+    <script>
+function popup() {
+  alert("Book Successfully Added");
+}
+</script>
 {% endblock %}
 
