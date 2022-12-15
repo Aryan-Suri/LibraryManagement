@@ -3,15 +3,56 @@
 
 
 {% block title %}
-    <title>Book List</title>
+    <title>Books</title>
 {% endblock %}
 
 {% block body %}
+     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Library Home</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'showBooks' %}"> Home </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'AddBook' %}"> Add Book </a>
+                            </li>
+                            {#                            <li class="nav-item">#}
+                            {#                                <a class="nav-link active" aria-current="page" href="{% url 'issue' %}"> Assign Book </a>#}
+                            {#                            </li>#}
+                            <li class="nav-item">  <form action="{%url 'search' %}" method="get">
+                                <div class="input-group ">
+                                    <input type="search" name="search" class="form-control" placeholder="Search for a Book" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <button class="btn	btn-primary" type="submit">
+                                        <i class="fas fa-search"></i> Search </button>
+                                </div>
+                            </form> </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa-solid fa-bars"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" href="{% url 'register' %}"> Sign-up </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
     <h3 style = "text-align: center" class = "display-4">
-        <a style = "text-decoration: none" href="{% url 'showBooks' %}"> Book List</a>
+        <a style = "text-decoration: none" class="text-light" href="{% url 'showBooks' %}"> Book List</a>
     </h3>
 
-    <table class="table table-hover">
+    <table id="table" class="table border border-rounded">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -47,7 +88,7 @@
                 </td>
 
                 <td>
-                    <button class="btn btn-outline-primary mt-1"><a href="{% url 'updateTasks' book.id %}" class="update-icon">
+                    <button class="btn btn-outline-primary mt-1"><a href="{% url 'updateBooks' book.id %}" class="update-icon">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a></button>
                 </td>
@@ -62,15 +103,21 @@
             {% endif %}
 
         {% empty %}
-            <h3>No items found with your search term, or there is no todo added yet.</h3>
+            <h3 class="text-light">There are no books with these terms</h3>
         {% endfor %}
         </tbody>
 
     </table>
-    <a href="{% url 'showBooks' %}" class="btn btn-success"><i class="fas fa-plus"></i> Show Books</a>
+    <a href="{% url 'showBooks' %}" class="btn btn-success"><i class="fas fa-plus"></i> All Books</a>
     <br>
     <br>
     <br>
 
-
+<button class="trigger">Click here to trigger the modal!</button>
+<div class="modal">
+    <div class="modal-content">
+        <span class="close-button">×</span>
+        <h1>Hello, I am a modal!</h1>
+    </div>
+</div>
 {% endblock %}

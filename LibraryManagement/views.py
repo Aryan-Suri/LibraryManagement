@@ -33,9 +33,10 @@ def register_view(request):
             return redirect('login')
     else:
         form = UserCreationForm()
-    return render(request, 'LibraryManagement/AddStudent.html', {'form': form})
+    return render(request, 'LibraryManagement/register.html', {'form': form})
 
 
+@login_required(login_url='login')
 def addBook(request):
     if request.method == 'POST':
         # Create a form instance and populate it with data from the request
@@ -63,7 +64,7 @@ def showBooks(request):
 
 
 @login_required(login_url='login')
-def update_task(request, book_id):
+def update_book(request, book_id):
     book = Book.objects.get(id=book_id)
     form = AddBook(request.POST or None, instance=book)
     if request.method == 'POST':
@@ -71,10 +72,10 @@ def update_task(request, book_id):
             form.save()
             return redirect('showBooks')
     context = {'form': form}
-    return render(request, 'LibraryManagement/updateTask.html', context)
+    return render(request, 'LibraryManagement/updateBook.html', context)
 
 
-def delete_task(request, book_id):
+def delete_book(request, book_id):
     book = Book.objects.get(id=book_id)
     book.delete()
     return redirect('showBooks')
